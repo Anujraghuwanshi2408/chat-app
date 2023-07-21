@@ -1,3 +1,5 @@
+const socket = io();
+
 let username = "";
 
 document.getElementById("join-btn").addEventListener("click" , (event)=>{
@@ -10,3 +12,47 @@ document.getElementById("join-btn").addEventListener("click" , (event)=>{
   }
 
 })
+
+document.getElementById('sent-button').addEventListener('click' ,(event) => {
+    event.preventDefault();
+    const data = {
+      username : username,
+      message : document.getElementById('message-input').value,
+    }
+    // if io is emitting anything socket can listen 
+    // if socket emit anything only io can listen
+
+    // sending the message to io
+    socket.emit('message' ,data);
+
+    addMessageFn(data);
+
+
+})
+
+socket.on('message' , (data) => {
+
+  // before adding this ,just cheak if you are the sender
+  if(data.username != username){
+    console.log(data);
+    addMessageReceive(data); 
+  }
+})
+
+// working for receive messages 
+function addMessageReceive(data){
+  var msgDiv = document.createElement("div");
+  msgDiv.innerText = `${data.username} : ${data.message}`;
+  msgDiv.setAttribute('class' , 'message received'); 
+  document.getElementById('message-container').appendChild(msgDiv);
+  document.getElementById('message-input').value = "";
+}
+
+// working for sent messages 
+function addMessageFn(data){
+  var msgDiv = document.createElement("div");
+  msgDiv.innerText = `${data.username} : ${data.message}`;
+  msgDiv.setAttribute('class' , 'message sent');
+  document.getElementById('message-container').appendChild(msgDiv);
+  document.getElementById('message-input').value = "";
+}
