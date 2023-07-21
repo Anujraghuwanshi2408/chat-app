@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form action="" class="form-username">
+        <h1>Join chatroom</h1>
+        <p>Username</p>
+        <input type="text" id="username-input">
+        <button type="submit" id="join-btn">Join Chat</button>
+    </form>
+
+    <!-- chatroom will be hidden initially -->
+    <div class="chatroom-container">
+        <div class="chatroom-header">
+            Chatroom
+        </div>
+        <div class="messages" id="message-container">
+            <div class="message sent">hey!</div>
+            <div class="message">hi</div>
+        </div>
+        <div class="input-div">
+            <input type="text" placeholder="Enter message" id="message-input">
+            <button id="sent-button">Send</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
